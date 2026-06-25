@@ -77,18 +77,16 @@ def main(args):
     asl_loss = create_loss(args.loss)
 
     for epoch in range(args.epochs):
-        if epoch>1:
-            break
         model.train()
         # pretrained_dict = torch.load('/data2/liubeiyan/weight/model_epoch_5.pth')
-        # pretrained_dict = torch.load('/home/liubeiyan/MKT-trans/logger/first_stage/0 256/model_epoch_5.pth')
+        # pretrained_dict = torch.load('/home/liubeiyan/MKT-trans/logger/first_stage/model_epoch_5.pth')
         # model_dict = model.state_dict()
         # pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
         # model_dict.update(pretrained_dict)
         # model.load_state_dict(model_dict)
 
 
-        #train(model,  args, optimizer, train_dataloader, logger, label_emb, asl_loss,epoch)
+        train(model,  args, optimizer, train_dataloader, logger, label_emb, asl_loss,epoch)
         model.eval()
         test(model, args, val_dataloader, logger, label_emb ,len_val_dataset, epoch)
 
@@ -105,7 +103,7 @@ if __name__ == "__main__":
     
     parser.add_argument("--batch-size",             type=int,   default=32,     )
     parser.add_argument("--test-batch-size",        type=int,   default=200,    )
-    parser.add_argument("--epochs",                 type=int,   default=10,     )
+    parser.add_argument("--epochs",                 type=int,   default=20,     )
     parser.add_argument("--warmup_epochs",          type=int,   default=2,      )
     parser.add_argument("--lr",                     type=float, default=1e-5,   )
     parser.add_argument("--min_lr",                 type=float, default=1e-7,   )
